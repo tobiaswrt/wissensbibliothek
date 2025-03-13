@@ -4,6 +4,22 @@
 
 {% block content %}
 
-<h2>Hallo2</h2>
+<div>
+    {% if kategorien %}
+
+        {% for kategorie in kategorien %}
+
+            <h4>{{ kategorie.name }}</h4>
+            <p>{{ kategorie.description }}</p>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>Keine Kategorien gefunden.</p>
+
+    {% endif %}
+
+</div>
 
 {% endblock %}
