@@ -1,0 +1,33 @@
+@font-face {
+    font-family: 'Satoshi (Local)';
+    src: url("../fonts/Satoshi-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi (Local)';
+    src: url("../fonts/Satoshi-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Satoshi (Local)';
+    src: url("../fonts/Satoshi-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+}
+
+:root {
+    --black: #000;
+    --white: #fff;
+    --grey: #E8EAEC;
+    --dark-grey: #D4D8DB;
+    --dark-blue: #272F41;
+    --lighter-grey: rgba(255, 255, 255, 0.5);
+}
+
+html {
+    scroll-behavior: smooth;
+}
