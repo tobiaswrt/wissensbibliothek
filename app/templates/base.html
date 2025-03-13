@@ -8,11 +8,13 @@
 </head>
 <body>
 
-{% include 'sidebar.html' %}
+  {% include 'sidebar.html' %}
 
-<main>
-  {% block content %}{% endblock %}
-</main>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
 
+
+  <script src="{{ url_for('static', filename = 'js/scripts.js') }}"></script>
 </body>
 </html>
