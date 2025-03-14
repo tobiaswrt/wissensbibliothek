@@ -4,22 +4,46 @@
 
 {% block content %}
 
-<div>
-    {% if kategorien %}
+<div class="page_wrapper">
+    <div class="heading_page_wrapper">
+        <h1>Dashboard</h1>
+    </div>
+    <div class="dashboard_body_grid">
+        <div class="dashboard_body_cell">
 
-        {% for kategorie in kategorien %}
+        </div>
+        <div class="dashboard_body_cell">
+            <h2>Neueste Themen</h2>
 
-            <h1>Dashboard</h1>
-            <h4>{{ kategorie.name }}</h4>
-            <p>{{ kategorie.description }}</p>
+            {% if kategorien %}
+                <div class="dashboard_article_grid">
+                    {% for kategorie in kategorien %}
 
-        {% endfor %}
+                        <div class="dashboard_article_box">
 
-    {% else %}
+                            <div class="article_info_wrapper">
+                                <div class="category_icon_wrapper" style="background-color: {{ kategorie.color }}">
+                                    <span class="category_icon">{{ kategorie.icon|default('📚') }}</span> 
+                                </div>
 
-        <p>Keine Kategorien gefunden.</p>
+                                <div class="article_heading_wrapper">
+                                    <h3>{{ kategorie.name }}</h3>
+                                    <p class="text-style-small">{{ kategorie.updated_at.strftime('%d.%m.%Y') }}</p>
+                                </div>
+                            </div>
 
-    {% endif %}
+                            <p>{{ kategorie.description|default('Keine Beschreibung vorhanden.')|truncate(100) }}</p>
+
+                        </div>
+
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Keine Kategorien gefunden.</p>
+            {% endif %}
+        </div>
+    </div>
+
 
 </div>
 

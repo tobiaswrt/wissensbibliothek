@@ -1,23 +1,23 @@
-const themeToggle = document.getElementById('theme-toggle');
+// Dark - Light Modus
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.querySelector('.sb_settings_box');
     
-// Prüfe, ob ein gespeichertes Theme existiert
-const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('theme');
     
-// Setze das gespeicherte Theme, falls vorhanden
-if (savedTheme === 'dark') {
-  document.documentElement.setAttribute('data-theme', 'dark');
-  themeToggle.checked = true;
-}
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+    }
     
-// Event Listener für den Theme Switch
-themeToggle.addEventListener('change', function() {
-  if (this.checked) {
-    // Dark Mode einschalten
-    document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    // Light Mode einschalten
-    document.documentElement.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'light');
-  }
+    themeToggle.addEventListener('click', function() {
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    });
 });
