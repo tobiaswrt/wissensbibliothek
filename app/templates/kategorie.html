@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Subkategorien{% endblock %}
+
+{% block content %}
+
+<div class="breadcrumb">
+    <a class="text-breadcrumb" href="{{ url_for('themen') }}">Themen</a>
+</div>
+
+<div class="heading_page_wrapper">
+    <h1>{{ kategorie.name }}</h1>
+    <div class="link_icon_wrapper background-dark-blue">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0C12.4539 0 12.8219 0.367985 12.8219 0.821918V11.1781H23.1781C23.632 11.1781 24 11.5461 24 12C24 12.4539 23.632 12.8219 23.1781 12.8219H12.8219V23.1781C12.8219 23.632 12.4539 24 12 24C11.5461 24 11.1781 23.632 11.1781 23.1781V12.8219H0.821918C0.367985 12.8219 0 12.4539 0 12C0 11.5461 0.367985 11.1781 0.821918 11.1781H11.1781V0.821918C11.1781 0.367985 11.5461 0 12 0Z" fill="currentColor"/>
+        </svg>    
+    </div>
+</div>
+
+{% if subkategorien %}
+<div class="subcategories_list">
+    <h2>Themenbereiche</h2>
+    <div class="subcategories_grid">
+        {% for subkategorie in subkategorien %}
+            <a href="{{ url_for('subkategorie_anzeigen', subkategorie_id=subkategorie.id) }}" class="subcategory_card">
+                <div class="subcategory_card_inner">
+                    <h3>{{ subkategorie.name }}</h3>
+                    <div class="subcategory_meta_wrapper">
+                        <div class="subcategory_meta">
+                            <span class="text-style-small">{{ subkategorie.articles.count() }} Artikel</span>
+                        </div>
+                        <div class="subcategory_meta">
+                            <span class="text-style-small">{{ subkategorie.updated_at.strftime('%d.%m.%Y') }}</span>
+                        </div>
+                    </div>
+                    <p>{{ subkategorie.description|default('Keine Beschreibung vorhanden.')|truncate(100) }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<div class="empty_state">
+    <p>Keine Subkategorien in dieser Kategorie gefunden.</p>
+</div>
+{% endif %}
+
+{% endblock %}

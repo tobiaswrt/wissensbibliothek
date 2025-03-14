@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ artikel.title }}{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a class="text-breadcrumb" href="{{ url_for('themen') }}">Themen</a>
+    <svg width="6" height="16" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.70358 10L0.212456 1.27302C-0.0763979 0.976139 -0.0698938 0.50131 0.226984 0.212456C0.523862 -0.0763979 0.998691 -0.0698933 1.28754 0.226984L10.2875 9.47698C10.5708 9.76813 10.5708 10.2319 10.2875 10.523L1.28754 19.773C0.998691 20.0699 0.523862 20.0764 0.226984 19.7875C-0.0698938 19.4987 -0.0763979 19.0239 0.212456 18.727L8.70358 10Z" fill="currentColor"/>
+    </svg>    
+    <a class="text-breadcrumb" href="{{ url_for('kategorie_anzeigen', kategorie_id=artikel.subcategory.category_id) }}">{{ artikel.subcategory.category.name }}</a>
+    <svg width="6" height="16" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.70358 10L0.212456 1.27302C-0.0763979 0.976139 -0.0698938 0.50131 0.226984 0.212456C0.523862 -0.0763979 0.998691 -0.0698933 1.28754 0.226984L10.2875 9.47698C10.5708 9.76813 10.5708 10.2319 10.2875 10.523L1.28754 19.773C0.998691 20.0699 0.523862 20.0764 0.226984 19.7875C-0.0698938 19.4987 -0.0763979 19.0239 0.212456 18.727L8.70358 10Z" fill="currentColor"/>
+    </svg>
+    <a class="text-breadcrumb" href="{{ url_for('subkategorie_anzeigen', subkategorie_id=artikel.subcategory_id) }}">{{ artikel.subcategory.name }}</a>
+</div>
+
+{% endblock %}

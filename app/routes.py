@@ -7,3 +7,25 @@ from app.models import Category, Subcategory, Article
 def startseite():
     kategorien = Category.query.all()
     return render_template('startseite.html', kategorien = kategorien)
+
+@app.route("/themen")
+def themen():
+    kategorien = Category.query.all()
+    return render_template('themen.html', kategorien = kategorien)
+
+@app.route("/themen/<int:kategorie_id>")
+def kategorie_anzeigen(kategorie_id):
+    kategorie = Category.query.get_or_404(kategorie_id)
+    subkategorien = kategorie.subcategories.all()
+    return render_template('kategorie.html', kategorie = kategorie, subkategorien = subkategorien)
+
+@app.route("/subkategorie/<int:subkategorie_id>")
+def subkategorie_anzeigen(subkategorie_id):
+    subkategorie = Subcategory.query.get_or_404(subkategorie_id)
+    artikel = subkategorie.articles.all()
+    return render_template('subkategorie.html', subkategorie=subkategorie, artikel=artikel)
+
+@app.route("/artikel/<int:artikel_id>")
+def artikel_anzeigen(artikel_id):
+    artikel = Article.query.get_or_404(artikel_id)
+    return render_template('artikel.html', artikel=artikel)

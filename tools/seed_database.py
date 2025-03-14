@@ -2,16 +2,13 @@ from app import app, db
 from app.models import Category, Subcategory, Article
 from datetime import datetime
 
-# Flask-Anwendungskontext erstellen
 with app.app_context():
     try:
-        # Überprüfen, ob bereits Daten vorhanden sind
         existing_categories = Category.query.all()
 
         if not existing_categories:
             print("Füge Testdaten hinzu...")
 
-            # Beispiel-Kategorie erstellen
             kategorie = Category(
                 name="Mathematik",
                 description="Alles rund um mathematische Konzepte und Formeln",
@@ -22,7 +19,6 @@ with app.app_context():
             db.session.commit()
             print(f"Kategorie '{kategorie.name}' wurde erstellt (ID: {kategorie.id})")
 
-            # Beispiel-Unterkategorie erstellen
             unterkategorie = Subcategory(
                 name="Algebra",
                 description="Grundlagen der Algebra und algebraische Strukturen",
@@ -32,7 +28,6 @@ with app.app_context():
             db.session.commit()
             print(f"Unterkategorie '{unterkategorie.name}' wurde erstellt (ID: {unterkategorie.id})")
 
-            # Beispiel-Artikel erstellen
             artikel = Article(
                 title="Quadratische Gleichungen",
                 description="Eine Einführung in quadratische Gleichungen und deren Lösungsmethoden",
