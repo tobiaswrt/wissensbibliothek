@@ -1,7 +1,6 @@
-from app import app
-from flask import render_template
+from app import app, db
+from flask import render_template, request, redirect, url_for, flash
 from app.models import Category, Subcategory, Article
-
 
 @app.route("/")
 def startseite():
@@ -29,3 +28,22 @@ def subkategorie_anzeigen(subkategorie_id):
 def artikel_anzeigen(artikel_id):
     artikel = Article.query.get_or_404(artikel_id)
     return render_template('artikel.html', artikel=artikel)
+
+@app.route("/themen/neu", methods = ['POST'])
+def kategorie_erstellen():
+    name = request.form.get('name')
+    description = request.form.get('description')
+
+    neue_kategorie = Category(
+        name = name,
+        description = description,
+    )
+
+    try:
+        db.session.add(neue_kategorie)
+        db.session.commit()
+
+    except Exception as e:
+        db.session.rollback()
+
+    return redirect(url_for('themen'))

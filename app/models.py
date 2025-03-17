@@ -7,8 +7,8 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(100), nullable = False)
     description = db.Column(db.Text)
-    icon = db.Column(db.Text)
-    color = db.Column(db.String(20))
+    # icon = db.Column(db.Text)
+    # color = db.Column(db.String(20))
     created_at = db.Column(db.DateTime, default = datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate = datetime.utcnow)
 
