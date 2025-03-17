@@ -19,13 +19,13 @@ def kategorie_anzeigen(kategorie_id):
     subkategorien = kategorie.subcategories.all()
     return render_template('kategorie.html', kategorie = kategorie, subkategorien = subkategorien)
 
-@app.route("/subkategorie/<int:subkategorie_id>")
+@app.route("/themen/subkategorie/<int:subkategorie_id>")
 def subkategorie_anzeigen(subkategorie_id):
     subkategorie = Subcategory.query.get_or_404(subkategorie_id)
     artikel = subkategorie.articles.all()
     return render_template('subkategorie.html', subkategorie=subkategorie, artikel=artikel)
 
-@app.route("/artikel/<int:artikel_id>")
+@app.route("/themen/subkategorie/artikel/<int:artikel_id>")
 def artikel_anzeigen(artikel_id):
     artikel = Article.query.get_or_404(artikel_id)
     return render_template('artikel.html', artikel=artikel)
