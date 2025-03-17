@@ -17,21 +17,29 @@
 
 <div class="article_container">
     <div class="article_header_wrapper">
+
         <h1>{{ artikel.title }}</h1>
+
         {% if artikel.description %}
         <p class="article-description">{{ artikel.description }}</p>
         {% endif %}
+
         <div class="article_meta_wrapper">
+
             {% if artikel.author %}
             <span class="article-meta-text">{{ artikel.author }}</span>
             {% endif %}
+
             <span class="article-meta-text">{{ artikel.created_at.strftime('%d.%m.%Y') }}</span>
             <span class="article-meta-text">{{ artikel.updated_at.strftime('%d.%m.%Y') }}</span>
+
         </div>
     </div>
 
+    {{ artikel.content|generate_toc|safe }}
+
     <div class="article_content">
-        {{ artikel.content|markdown|safe }}
+        {{ artikel.content|markdown|add_heading_ids|safe }}
     </div>
 </div>
 

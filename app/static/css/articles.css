@@ -2,6 +2,10 @@
     line-height: 1.7;
 }
 
+.article_content h1 {
+    font-size: 2rem;
+}
+
 .article_content h2 {
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -30,4 +34,101 @@
 
 .article_content a:hover {
     text-decoration: underline;
+}
+
+/* Inhaltsverzeichnis-Styling */
+.toc-container {
+    background-color: var(--grey);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border-left: 4px solid var(--dark-blue);
+}
+
+.toc-container h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.toc-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.toc-item {
+    margin-bottom: 0.5rem;
+}
+
+.toc-item a {
+    color: var(--black);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.toc-item a:hover {
+    color: #0077cc;
+    text-decoration: underline;
+}
+
+/* Einrückung basierend auf Überschriftslevel */
+.toc-level-1 {
+    font-weight: bold;
+}
+
+.toc-level-2 {
+    margin-left: 1rem;
+}
+
+.toc-level-3 {
+    margin-left: 2rem;
+    font-size: 0.95rem;
+}
+
+.toc-level-4, .toc-level-5, .toc-level-6 {
+    margin-left: 3rem;
+    font-size: 0.9rem;
+    color: var(--lighter-grey);
+}
+
+/* Styling für Überschriften mit IDs (für das Scrollen) */
+.article_content h1[id],
+.article_content h2[id],
+.article_content h3[id],
+.article_content h4[id],
+.article_content h5[id],
+.article_content h6[id] {
+    scroll-margin-top: 2rem; /* Verhindert, dass Überschriften unter der Navigationsleiste verschwinden */
+}
+
+/* Hover-Effekt für verlinkte Überschriften */
+.article_content h1[id]:hover,
+.article_content h2[id]:hover,
+.article_content h3[id]:hover,
+.article_content h4[id]:hover,
+.article_content h5[id]:hover,
+.article_content h6[id]:hover {
+    cursor: pointer;
+}
+
+.article_content h1[id]::after,
+.article_content h2[id]::after,
+.article_content h3[id]::after,
+.article_content h4[id]::after,
+.article_content h5[id]::after,
+.article_content h6[id]::after {
+    content: " 🔗";
+    opacity: 0;
+    font-size: 0.8em;
+    transition: opacity 0.2s ease;
+}
+
+.article_content h1[id]:hover::after,
+.article_content h2[id]:hover::after,
+.article_content h3[id]:hover::after,
+.article_content h4[id]:hover::after,
+.article_content h5[id]:hover::after,
+.article_content h6[id]:hover::after {
+    opacity: 0.5;
 }
