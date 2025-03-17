@@ -2,11 +2,11 @@
     display: none;
     position: absolute;
     background-color: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
     z-index: 10000;
     min-width: 150px;
-    padding: 5px 0;
+    padding: 0.5rem 0.5rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .context-menu-list {
@@ -16,31 +16,17 @@
 }
 
 .context-menu-item {
-    padding: 10px 15px;
+    padding: 12px 16px;
+    border-radius: 0.5rem;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5rem;
     cursor: pointer;
     transition: background-color 0.2s;
     color: var(--black);
 }
 
 .context-menu-item:hover {
-    background-color: var(--lightest-grey);
-}
-
-.delete-item {
-    color: #e53935;
-}
-
-.delete-item svg {
-    fill: #e53935;
-}
-
-.edit-item {
+    background-color: var(--primary-muted);
     color: var(--primary-blue);
-}
-
-.edit-item svg {
-    fill: var(--primary-blue);
 }
