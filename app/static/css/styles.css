@@ -21,6 +21,7 @@
 
 :root {
     --primary-blue: #2541EF;
+    --primary-dark: #1a34d9;
     --primary-muted: rgba(37, 65, 239, 0.1);
     --primary-light-muted: rgba(37, 65, 239, 0.05);
     --black: #000;
@@ -161,6 +162,11 @@ p {
 .link_icon_wrapper.background-dark-blue {
     background-color: var(--primary-blue);
     color: var(--white);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.link_icon_wrapper.background-dark-blue:hover {
+    background-color: var(--primary-dark);
 }
 
 .link_icon_wrapper.active {

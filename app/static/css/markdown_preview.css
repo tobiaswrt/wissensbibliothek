@@ -1,0 +1,68 @@
+.editor-preview, 
+.editor-preview-side {
+    background-color: var(--white);
+    padding: 1rem;
+}
+
+.editor-preview h1,
+.editor-preview-side h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.editor-preview h2,
+.editor-preview-side h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.editor-preview h3,
+.editor-preview-side h3 {
+    font-size: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.editor-preview p,
+.editor-preview-side p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.editor-preview code,
+.editor-preview-side code {
+    background-color: var(--lightest-grey);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+}
+
+.editor-preview pre,
+.editor-preview-side pre {
+    background-color: var(--lightest-grey);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    overflow-x: auto;
+}
+
+.editor-preview table,
+.editor-preview-side table {
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.editor-preview td, 
+.editor-preview th,
+.editor-preview-side td, 
+.editor-preview-side th {
+    border: 1px solid var(--light-grey);
+    padding: 0.5rem;
+}
+
+.editor-preview th,
+.editor-preview-side th {
+    background-color: var(--lightest-grey);
+}

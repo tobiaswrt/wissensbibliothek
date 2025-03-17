@@ -69,26 +69,34 @@
 <div id="newCategoryPopup" class="popup_overlay">
     <div class="popup_container">
         <div class="popup_header">
+
             <h3>Neues Thema erstellen</h3>
+
             <div class="popup_close" data-popup-target="newCategoryPopup">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M24 2.4L21.6 0L12 9.6L2.4 0L0 2.4L9.6 12L0 21.6L2.4 24L12 14.4L21.6 24L24 21.6L14.4 12L24 2.4Z" fill="currentColor"/>
-                </svg>
+                <svg width="16" height="16" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.38388 0.616117C1.89573 0.127961 1.10427 0.127961 0.616117 0.616117C0.127961 1.10427 0.127961 1.89573 0.616117 2.38388L16.2322 18L0.616398 33.6158C0.128242 34.104 0.128242 34.8954 0.616398 35.3836C1.10455 35.8718 1.89601 35.8718 2.38416 35.3836L18 19.7678L33.6153 35.3831C34.1035 35.8713 34.895 35.8713 35.3831 35.3831C35.8713 34.895 35.8713 34.1035 35.3831 33.6153L19.7678 18L35.3834 2.38437C35.8716 1.89622 35.8716 1.10476 35.3834 0.616605C34.8952 0.128449 34.1038 0.128449 33.6156 0.616605L18 16.2322L2.38388 0.616117Z" fill="currentColor"/>
+                </svg>                    
             </div>
+
         </div>
+
         <form action="{{ url_for('kategorie_erstellen') }}" method="post" class="popup_form">
+
             <div class="form_field">
                 <label for="category_name">Name der Kategorie</label>
                 <input type="text" name="name" id="category_name" required>
             </div>
+            
             <div class="form_field">
                 <label for="category_description">Beschreibung</label>
                 <textarea name="description" id="category_description" rows="4"></textarea>
             </div>
+
             <div class="form_actions">
-                <button type="submit" class="btn btn_primary">Erstellen</button>
                 <button type="button" class="btn btn_secondary" data-popup-target="newCategoryPopup">Abbrechen</button>
+                <button type="submit" class="btn btn_primary">Erstellen</button>
             </div>
+
         </form>
     </div>
 </div>

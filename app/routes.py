@@ -42,8 +42,60 @@ def kategorie_erstellen():
     try:
         db.session.add(neue_kategorie)
         db.session.commit()
+        # Flash Nachrichten hinzufügen
 
     except Exception as e:
         db.session.rollback()
+        # Flash Nachrichten hinzufügen
 
     return redirect(url_for('themen'))
+
+@app.route("/themen/kategorie/<int:kategorie_id>/neu", methods = ['POST'])
+def subkategorie_erstellen(kategorie_id):
+    if request.method == 'POST':
+        name = request.form.get('name')
+        description = request.form.get('description')
+
+        neue_subkategorie = Subcategory (
+            name = name,
+            description = description,
+            category_id = kategorie_id
+        )
+
+        try:
+            db.session.add(neue_subkategorie)
+            db.session.commit()
+            # Flash Nachrichten hinzufügen
+
+        except Exception as e:
+            db.session.rollback()
+            # Flash Nachrichten hinzufügen
+
+        return redirect(url_for('kategorie_anzeigen', kategorie_id = kategorie_id))
+    
+@app.route("/themen/subkategorie/<int:subkategorie_id>/neu", methods=['POST'])
+def artikel_erstellen(subkategorie_id):
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        content = request.form.get('content')
+        author = request.form.get('author')
+        
+        neuer_artikel = Article(
+            title=title,
+            description=description,
+            content=content,
+            author=author,
+            subcategory_id=subkategorie_id
+        )
+        
+        try:
+            db.session.add(neuer_artikel)
+            db.session.commit()
+            # Flash Nachrichten hinzufügen
+
+        except Exception as e:
+            db.session.rollback()
+            # Flash Nachrichten hinzufügen
+            
+        return redirect(url_for('subkategorie_anzeigen', subkategorie_id=subkategorie_id))

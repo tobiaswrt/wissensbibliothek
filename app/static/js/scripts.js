@@ -22,9 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Allgemeine Popup-Funktionalität
 document.addEventListener('DOMContentLoaded', function() {
-    // Allgemeine Funktion, um Popups zu öffnen
     function openPopup(popupId) {
         const popup = document.getElementById(popupId);
         if (popup) {
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Allgemeine Funktion, um Popups zu schließen
     function closePopup(popupId) {
         const popup = document.getElementById(popupId);
         if (popup) {
@@ -40,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Event Listener für alle Schließen-Buttons
     document.querySelectorAll('[data-popup-target]').forEach(element => {
         element.addEventListener('click', function() {
             const popupId = this.getAttribute('data-popup-target');
@@ -48,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Event Listener für das Klicken außerhalb von Popups
     document.querySelectorAll('.popup_overlay').forEach(popup => {
         popup.addEventListener('click', function(event) {
             if (event.target === this) {
@@ -57,9 +52,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Spezifische Popup-Öffnen-Buttons
-    
-    // 1. Neue Kategorie Button
     const addCategoryBtn = document.querySelector('.heading_page_wrapper .link_icon_wrapper.background-dark-blue.category_button');
     if (addCategoryBtn) {
         addCategoryBtn.addEventListener('click', function() {
@@ -67,6 +59,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Später andere Buttons hinzufügen
+    const addSubcategoryBtn = document.querySelector('.heading_page_wrapper .link_icon_wrapper.background-dark-blue');
+    if (addSubcategoryBtn && document.getElementById('newSubcategoryPopup')) {
+        addSubcategoryBtn.addEventListener('click', function() {
+            openPopup('newSubcategoryPopup');
+        });
+    }
 
+    const addArticleBtn = document.querySelector('.heading_page_wrapper .link_icon_wrapper.background-dark-blue');
+    if (addArticleBtn && document.getElementById('newArticlePopup')) {
+        addArticleBtn.addEventListener('click', function() {
+            openPopup('newArticlePopup');
+            
+            if (!window.articleEditor) {
+                window.articleEditor = new SimpleMDE({
+                    element: document.getElementById('article_content'),
+                    spellChecker: false,
+                    autofocus: false,
+                    toolbar: ["bold", "italic", "heading", "|", 
+                             "quote", "unordered-list", "ordered-list", "|", 
+                             "link", "image", "table", "|", 
+                             "preview", "side-by-side", "fullscreen", "|", 
+                             "guide"]
+                });
+            }
+        });
+    }
 });
