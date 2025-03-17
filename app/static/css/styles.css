@@ -35,6 +35,12 @@
 
 [data-theme = "dark"] {
     --black: #fff;
+    --white: #000;
+    --lightest-grey: #111;
+    --light-hover-grey: #222;
+    --lighter-grey: #222;
+    --light-grey: #313131;
+    --dark-grey: rgba(255, 255, 255, 0.5);
 }
 
 * {
