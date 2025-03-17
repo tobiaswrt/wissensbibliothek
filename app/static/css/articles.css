@@ -247,3 +247,68 @@ input::placeholder {
     font-size: 14px;
     color: var(--primary-blue);
 }
+
+/* Edit Mode Styles */
+.edit-title-input {
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: 700;
+    font-family: inherit;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.edit-description-input {
+    width: 100%;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: var(--white);
+    color: var(--black);
+    resize: none;
+}
+
+.article_btn_save,
+.article_btn_cancel {
+    display: none; /* Anfangs versteckt, wird via JS angezeigt */
+}
+
+.article_btn_save {
+    background-color: #4CAF50; /* Grün für Speichern */
+    color: white;
+}
+
+.article_btn_save:hover {
+    background-color: #388E3C;
+}
+
+.article_btn_cancel {
+    background-color: #F44336; /* Rot für Abbrechen */
+    color: white; 
+}
+
+.article_btn_cancel:hover {
+    background-color: #D32F2F;
+}
+
+/* Klasse für den Edit-Button hinzufügen */
+.article_btn_edit {
+    cursor: pointer;
+}
+
+.article_btn_delete {
+    background-color: #F44336; /* Rot für Löschen */
+    color: white;
+    display: none; /* Anfangs versteckt */
+}
+
+.article_btn_delete:hover {
+    background-color: #D32F2F;
+}

@@ -1,0 +1,46 @@
+.context-menu {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    min-width: 150px;
+    padding: 5px 0;
+}
+
+.context-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.context-menu-item {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: var(--black);
+}
+
+.context-menu-item:hover {
+    background-color: var(--lightest-grey);
+}
+
+.delete-item {
+    color: #e53935;
+}
+
+.delete-item svg {
+    fill: #e53935;
+}
+
+.edit-item {
+    color: var(--primary-blue);
+}
+
+.edit-item svg {
+    fill: var(--primary-blue);
+}

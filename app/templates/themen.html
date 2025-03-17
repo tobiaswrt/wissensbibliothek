@@ -66,6 +66,7 @@
 
 </div>
 
+<!-- Popup Fenster zum Erstellen -->
 <div id="newCategoryPopup" class="popup_overlay">
     <div class="popup_container">
         <div class="popup_header">
@@ -99,6 +100,55 @@
 
         </form>
     </div>
+</div>
+
+<!-- Popup für Kategorie bearbeiten -->
+<div id="editCategoryPopup" class="popup_overlay">
+    <div class="popup_container">
+        <div class="popup_header">
+            <h3>Kategorie bearbeiten</h3>
+            <div class="popup_close" data-popup-target="editCategoryPopup">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 2.4L21.6 0L12 9.6L2.4 0L0 2.4L9.6 12L0 21.6L2.4 24L12 14.4L21.6 24L24 21.6L14.4 12L24 2.4Z" fill="currentColor"/>
+                </svg>
+            </div>
+        </div>
+        <form action="{{ url_for('kategorie_bearbeiten') }}" method="post" class="popup_form">
+            <input type="hidden" id="edit_category_id" name="category_id">
+            <div class="form_field">
+                <label for="edit_category_name">Name der Kategorie</label>
+                <input type="text" id="edit_category_name" name="name" required>
+            </div>
+            <div class="form_field">
+                <label for="edit_category_description">Beschreibung</label>
+                <textarea id="edit_category_description" name="description" rows="4" class="no-resize"></textarea>
+            </div>
+            <div class="form_actions">
+                <button type="submit" class="btn btn_primary">Speichern</button>
+                <button type="button" class="btn btn_secondary" data-popup-target="editCategoryPopup">Abbrechen</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Kontextmenü für Rechtsklick -->
+<div id="contextMenu" class="context-menu">
+
+    <ul class="context-menu-list">
+        <li class="context-menu-item edit-item" data-action="edit">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+            </svg>
+            Bearbeiten
+        </li>
+        <li class="context-menu-item delete-item" data-action="delete">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/>
+            </svg>
+            Löschen
+        </li>
+    </ul>
+
 </div>
 
 {% endblock %}
