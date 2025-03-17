@@ -20,23 +20,47 @@ def render_markdown(text):
 @app.template_filter('generate_toc')
 def generate_toc(markdown_content):
     """
-    Generiert ein Inhaltsverzeichnis aus Markdown-Überschriften
+    Generiert ein Inhaltsverzeichnis aus Markdown-Überschriften mit Nummerierung
     """
+    # Suche nach Überschriften im Format: # Überschrift
     headings = re.findall(r'^(#{1,6})\s+(.+)$', markdown_content, re.MULTILINE)
     
     if not headings:
         return ''
     
-    toc = ['<div class="toc_container">', '<h2>Inhaltsverzeichnis</h2>', '<ul class="toc-list">']
+    toc = ['<div class="toc_container">', '<h2>Inhaltsverzeichnis</h2>', '<ul class="toc_list">']
+    
+    counters = [0, 0, 0, 0, 0, 0]
+    last_level = 0
     
     for heading in headings:
         level = len(heading[0])
+        
         text = heading[1].strip()
+        
         slug = re.sub(r'[^\w\s-]', '', text).lower()
         slug = re.sub(r'[\s-]+', '-', slug)
         
-        indent = '  ' * (level - 1) 
-        toc.append(f'{indent}<li class="toc-item toc-level-{level}"><a href="#{slug}">{text}</a></li>')
+        if level > last_level:
+            counters[level-1] += 1
+            for i in range(level, 6):
+                counters[i] = 0
+        elif level < last_level:
+            counters[level-1] += 1
+            for i in range(level, 6):
+                counters[i] = 0
+        else:
+            counters[level-1] += 1
+        
+        numbering = ""
+        for i in range(level):
+            if counters[i] > 0:
+                numbering += str(counters[i]) + "."
+        
+        indent = '  ' * (level - 1)
+        toc.append(f'{indent}<li class="toc-item toc-level-{level}"><a href="#{slug}"><span class="toc-number">{numbering}</span> {text}</a></li>')
+        
+        last_level = level
     
     toc.append('</ul>')
     toc.append('</div>')

@@ -3,24 +3,53 @@
 {% block title %}{{ artikel.title }}{% endblock %}
 
 {% block content %}
-<div class="breadcrumb">
-    <a class="text-breadcrumb" href="{{ url_for('themen') }}">Themen</a>
-    <svg width="6" height="16" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.70358 10L0.212456 1.27302C-0.0763979 0.976139 -0.0698938 0.50131 0.226984 0.212456C0.523862 -0.0763979 0.998691 -0.0698933 1.28754 0.226984L10.2875 9.47698C10.5708 9.76813 10.5708 10.2319 10.2875 10.523L1.28754 19.773C0.998691 20.0699 0.523862 20.0764 0.226984 19.7875C-0.0698938 19.4987 -0.0763979 19.0239 0.212456 18.727L8.70358 10Z" fill="currentColor"/>
-    </svg>    
-    <a class="text-breadcrumb" href="{{ url_for('kategorie_anzeigen', kategorie_id=artikel.subcategory.category_id) }}">{{ artikel.subcategory.category.name }}</a>
-    <svg width="6" height="16" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8.70358 10L0.212456 1.27302C-0.0763979 0.976139 -0.0698938 0.50131 0.226984 0.212456C0.523862 -0.0763979 0.998691 -0.0698933 1.28754 0.226984L10.2875 9.47698C10.5708 9.76813 10.5708 10.2319 10.2875 10.523L1.28754 19.773C0.998691 20.0699 0.523862 20.0764 0.226984 19.7875C-0.0698938 19.4987 -0.0763979 19.0239 0.212456 18.727L8.70358 10Z" fill="currentColor"/>
-    </svg>
-    <a class="text-breadcrumb" href="{{ url_for('subkategorie_anzeigen', subkategorie_id=artikel.subcategory_id) }}">{{ artikel.subcategory.name }}</a>
+
+<div class="article_links_container">
+
+    <div class="breadcrumb">
+        <a class="text-breadcrumb" href="{{ url_for('themen') }}">Themen</a>
+        <svg width="6" height="16" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.70358 10L0.212456 1.27302C-0.0763979 0.976139 -0.0698938 0.50131 0.226984 0.212456C0.523862 -0.0763979 0.998691 -0.0698933 1.28754 0.226984L10.2875 9.47698C10.5708 9.76813 10.5708 10.2319 10.2875 10.523L1.28754 19.773C0.998691 20.0699 0.523862 20.0764 0.226984 19.7875C-0.0698938 19.4987 -0.0763979 19.0239 0.212456 18.727L8.70358 10Z" fill="currentColor"/>
+        </svg>    
+        <a class="text-breadcrumb" href="{{ url_for('kategorie_anzeigen', kategorie_id=artikel.subcategory.category_id) }}">{{ artikel.subcategory.category.name }}</a>
+        <svg width="6" height="16" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.70358 10L0.212456 1.27302C-0.0763979 0.976139 -0.0698938 0.50131 0.226984 0.212456C0.523862 -0.0763979 0.998691 -0.0698933 1.28754 0.226984L10.2875 9.47698C10.5708 9.76813 10.5708 10.2319 10.2875 10.523L1.28754 19.773C0.998691 20.0699 0.523862 20.0764 0.226984 19.7875C-0.0698938 19.4987 -0.0763979 19.0239 0.212456 18.727L8.70358 10Z" fill="currentColor"/>
+        </svg>
+        <a class="text-breadcrumb" href="{{ url_for('subkategorie_anzeigen', subkategorie_id=artikel.subcategory_id) }}">{{ artikel.subcategory.name }}</a>
+    </div>
+
+    <div class="article_bar_container">
+        <div class="search_bar_wrapper">
+            <input type="text" class="search_bar_input" placeholder="Suchen...">
+            <svg class="search-bar-icon" width="16" height="16" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 0C6.26801 0 0 6.26801 0 14C0 21.732 6.26801 28 14 28C17.4159 28 20.5461 26.7766 22.9763 24.7441L33.8662 35.6339C34.3543 36.122 35.1458 36.122 35.6339 35.6339C36.1221 35.1457 36.1221 34.3543 35.6339 33.8661L24.7441 22.9763C26.7766 20.5461 28 17.4159 28 14C28 6.26801 21.732 0 14 0ZM2.5 14C2.5 7.64873 7.64873 2.5 14 2.5C20.3513 2.5 25.5 7.64873 25.5 14C25.5 20.3513 20.3513 25.5 14 25.5C7.64873 25.5 2.5 20.3513 2.5 14Z" fill="currentColor"/>
+            </svg>    
+        </div>
+
+        <div class="article_btn_wrapper">
+
+            <div class="article_btn">
+                <svg width="12" height="16" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 3.87692C0 1.73576 1.69236 0 3.78 0H14.22C16.3076 0 18 1.73576 18 3.87692V23.0769C18 23.4236 17.8106 23.741 17.5097 23.8988C17.2088 24.0566 16.847 24.0282 16.5731 23.8252L8.99996 18.2156L1.42694 23.8252C1.15295 24.0282 0.791196 24.0566 0.490274 23.8988C0.189352 23.741 0 23.4236 0 23.0769V3.87692ZM3.78 1.84615C2.68648 1.84615 1.8 2.75536 1.8 3.87692V21.2716L8.47301 16.3286C8.78758 16.0956 9.21233 16.0956 9.5269 16.3286L16.2 21.2716V3.87692C16.2 2.75536 15.3135 1.84615 14.22 1.84615H3.78Z" fill="currentColor"/>
+                </svg>    
+            </div>
+            <div class="article_btn">
+                <svg width="16" height="16" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M37.9741 2.02688C35.2767 -0.670533 30.9033 -0.6704 28.2061 2.02717L4.03755 26.1986C3.27584 26.9604 2.73303 27.913 2.46599 28.9567L0.0390406 38.4417C-0.0703958 38.8694 0.0538945 39.3231 0.366025 39.6353C0.678156 39.9476 1.13183 40.072 1.55956 39.9626L11.0458 37.5381C12.0904 37.2711 13.0439 36.7279 13.8062 35.9655L33.971 15.7983L34.8514 16.7373C35.4974 17.4264 35.48 18.5038 34.8121 19.1716L31.3661 22.6176C30.878 23.1058 30.878 23.8973 31.3661 24.3854C31.8543 24.8736 32.6457 24.8736 33.1339 24.3854L36.5799 20.9394C38.2019 19.3174 38.2441 16.7009 36.6752 15.0275L35.7396 14.0295L37.9744 11.7943C40.6714 9.097 40.6713 4.72405 37.9741 2.02688ZM29.9739 3.79483C31.6949 2.07367 34.4853 2.07359 36.2064 3.79464C37.9273 5.51556 37.9274 8.30567 36.2066 10.0267L12.0383 34.1978C11.5933 34.6429 11.0366 34.9601 10.4268 35.1159L2.9838 37.0183L4.88796 29.5764C5.04386 28.9671 5.36075 28.411 5.80542 27.9663L29.9739 3.79483Z" fill="currentColor"/>
+                </svg>        
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="article_container">
+
     <div class="article_header_wrapper">
 
         <h1>{{ artikel.title }}</h1>
 
         {% if artikel.description %}
+
         <p class="article-description">{{ artikel.description }}</p>
         {% endif %}
 
@@ -30,8 +59,7 @@
             <span class="article-meta-text">{{ artikel.author }}</span>
             {% endif %}
 
-            <span class="article-meta-text">{{ artikel.created_at.strftime('%d.%m.%Y') }}</span>
-            <span class="article-meta-text">{{ artikel.updated_at.strftime('%d.%m.%Y') }}</span>
+            <span class="article-meta-text">Updated: {{ artikel.updated_at.strftime('%d.%m.%Y') }}</span>
 
         </div>
     </div>
