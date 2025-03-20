@@ -14,8 +14,40 @@ migrate = Migrate(app, db)
 
 @app.template_filter('markdown')
 def render_markdown(text):
-    html = markdown.markdown(text, extensions = ['extra', 'codehilite', 'tables'])
+    escaped_patterns = []
+    
+    escape_pattern = re.compile(r'\\([\\`*_{}[\]()#+.!-])')
+    
+    def replace_escape(match):
+        escaped_char = match.group(1)
+        placeholder = f"ESCAPED_CHAR_{len(escaped_patterns)}"
+        escaped_patterns.append(escaped_char)
+        return placeholder
+    
+    text = escape_pattern.sub(replace_escape, text)
+    
+    html = markdown.markdown(text, extensions=[
+        'extra',             # Extra-Features wie Tabellen und Fenced Code Blocks
+        'codehilite',        # Syntax-Highlighting
+        'fenced_code',       # Fenced Code Blocks
+        'nl2br',             # Zeilenumbrüche zu <br> konvertieren
+        'sane_lists',        # Bessere Listen-Verarbeitung
+        'tables'             # Tabellenunterstützung
+    ])
+    
+    for i, char in enumerate(escaped_patterns):
+        html = html.replace(f"ESCAPED_CHAR_{i}", char)
+    
     return html
+
+# Sie können auch eine speziellere Escape-Funktion hinzufügen
+@app.template_filter('escape_markdown')
+def escape_markdown(text):
+    """Escape Markdown-Syntax, damit sie als reiner Text angezeigt wird"""
+    escape_chars = ['\\', '`', '*', '_', '{', '}', '[', ']', '(', ')', '#', '+', '-', '.', '!']
+    for char in escape_chars:
+        text = text.replace(char, '\\' + char)
+    return text
 
 @app.template_filter('generate_toc')
 def generate_toc(markdown_content):

@@ -572,3 +572,52 @@ if (subcontextMenu) {
         hideSubcontextMenu();
     });
 }
+
+// Diese Funktion zu app/static/js/scripts.js hinzufügen
+document.addEventListener('DOMContentLoaded', function() {
+    // Finden Sie alle .codehilite Container
+    const codeBlocks = document.querySelectorAll('.article_content div.codehilite');
+    
+    codeBlocks.forEach(function(block) {
+        // Versuchen, die Sprache aus der Klasse abzuleiten
+        const preElement = block.querySelector('pre');
+        if (preElement) {
+            const codeElement = preElement.querySelector('code');
+            if (codeElement && codeElement.className) {
+                const langMatch = codeElement.className.match(/language-(\w+)/);
+                if (langMatch && langMatch[1]) {
+                    // Sprachname als data-Attribut setzen
+                    block.setAttribute('data-language', langMatch[1]);
+                } else {
+                    block.setAttribute('data-language', 'code');
+                }
+            } else {
+                block.setAttribute('data-language', 'code');
+            }
+        }
+        
+        // Kopieren-Button hinzufügen
+        const copyButton = document.createElement('button');
+        copyButton.className = 'code-copy-btn';
+        copyButton.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3v2h8V3H8zM6 5V1h12v4h4v18H2V5h4zm14 2H4v14h16V7z" fill="currentColor"/></svg>';
+        copyButton.setAttribute('title', 'Code kopieren');
+        
+        // Ereignishandler für Kopieren-Button
+        copyButton.addEventListener('click', function() {
+            const code = block.querySelector('pre').textContent;
+            navigator.clipboard.writeText(code).then(function() {
+                // Erfolgreich kopiert
+                copyButton.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="currentColor"/></svg>';
+                copyButton.classList.add('success');
+                
+                // Nach 2 Sekunden den Button zurücksetzen
+                setTimeout(function() {
+                    copyButton.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 3v2h8V3H8zM6 5V1h12v4h4v18H2V5h4zm14 2H4v14h16V7z" fill="currentColor"/></svg>';
+                    copyButton.classList.remove('success');
+                }, 2000);
+            });
+        });
+        
+        block.appendChild(copyButton);
+    });
+});
