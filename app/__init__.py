@@ -14,31 +14,88 @@ migrate = Migrate(app, db)
 
 @app.template_filter('markdown')
 def render_markdown(text):
-    escaped_patterns = []
+    """
+    Verbesserter Markdown-Filter mit sauberer HTML-Ausgabe für spezielle Formate
+    """
+    # Farbtext mit spezifischer Farbe
+    def color_replace(match):
+        color = match.group(1)
+        content = match.group(2)
+        # Normalisiere Zeilenumbrüche, damit sie konsistent sind
+        content = content.replace('\r\n', '\n')
+        # Ersetze Zeilenumbrüche durch <br> Tags ohne zusätzliche Abstände
+        content = content.replace('\n', '<br>')
+        return f'<span style="color:{color}">{content}</span>'
     
-    escape_pattern = re.compile(r'\\([\\`*_{}[\]()#+.!-])')
+    text = re.sub(r'\{color:(#[0-9a-fA-F]{3,6})\}(.*?)\{/color\}', 
+                  color_replace, text, flags=re.DOTALL)
     
-    def replace_escape(match):
-        escaped_char = match.group(1)
-        placeholder = f"ESCAPED_CHAR_{len(escaped_patterns)}"
-        escaped_patterns.append(escaped_char)
-        return placeholder
+    # Standardfarbe
+    def standard_color_replace(match):
+        content = match.group(1)
+        content = content.replace('\r\n', '\n')
+        content = content.replace('\n', '<br>')
+        return f'<span style="color:#2541EF">{content}</span>'
     
-    text = escape_pattern.sub(replace_escape, text)
+    text = re.sub(r'\{color\}(.*?)\{/color\}', 
+                  standard_color_replace, text, flags=re.DOTALL)
     
+    # Vorformatierte Code-Schriftart mit präziser Whitespace-Behandlung
+    def code_font_replace(match):
+        content = match.group(1)
+        # Normalisiere Zeilenumbrüche
+        content = content.replace('\r\n', '\n')
+        # HTML escapen
+        content = content.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+        # Behandle Zeilenumbrüche und Leerzeichen präzise
+        content = content.replace(' ', '&nbsp;')
+        content = content.replace('\n', '<br>')
+        return f'<span class="code-font">{content}</span>'
+    
+    text = re.sub(r'\{code-font\}(.*?)\{/code-font\}', 
+                  code_font_replace, text, flags=re.DOTALL)
+    
+    # Code-Block-Syntax
+    text = re.sub(r'<code-block language="([^"]+)">', r'<pre><code class="language-\1">', text)
+    text = re.sub(r'</code-block>', r'</code></pre>', text)
+    
+    # Inline-Code-Syntax
+    text = re.sub(r'<code>(.*?)</code>', r'`\1`', text, flags=re.DOTALL)
+    
+    # Markdown zu HTML konvertieren
     html = markdown.markdown(text, extensions=[
-        'extra',             # Extra-Features wie Tabellen und Fenced Code Blocks
-        'codehilite',        # Syntax-Highlighting
-        'fenced_code',       # Fenced Code Blocks
-        'nl2br',             # Zeilenumbrüche zu <br> konvertieren
-        'sane_lists',        # Bessere Listen-Verarbeitung
-        'tables'             # Tabellenunterstützung
+        'extra',
+        'codehilite',
+        'fenced_code',
+        'nl2br',
+        'sane_lists',
+        'tables'
     ])
     
-    for i, char in enumerate(escaped_patterns):
-        html = html.replace(f"ESCAPED_CHAR_{i}", char)
-    
     return html
+
+@app.template_filter('add_code_styling')
+def add_code_styling(html_content):
+    pattern = r'<pre><code class="language-([^"]+)">(.*?)</code></pre>'
+    
+    def add_styling(match):
+        language = match.group(1)
+        code = match.group(2)
+        return f'''
+        <div class="code-block-container">
+            <div class="code-block-header">
+                <span class="code-language">{language.upper()}</span>
+                <button class="code-copy-btn" title="Code kopieren">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 3v2h8V3H8zM6 5V1h12v4h4v18H2V5h4zm14 2H4v14h16V7z" fill="currentColor"/>
+                    </svg>
+                </button>
+            </div>
+            <pre><code class="language-{language}">{code}</code></pre>
+        </div>
+        '''
+    
+    return re.sub(pattern, add_styling, html_content, flags=re.DOTALL)
 
 # Sie können auch eine speziellere Escape-Funktion hinzufügen
 @app.template_filter('escape_markdown')

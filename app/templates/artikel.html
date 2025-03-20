@@ -71,7 +71,7 @@
     {{ artikel.content|generate_toc|safe }}
 
     <div class="article_content" data-markdown-content = "{{ artikel.content }}">
-        {{ artikel.content|markdown|add_heading_ids|safe }}
+        {{ artikel.content|markdown|add_code_styling|add_heading_ids|safe }}
     </div>
 </div>
 
